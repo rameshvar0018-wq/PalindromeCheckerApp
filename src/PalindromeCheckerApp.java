@@ -7,23 +7,32 @@ public class PalindromeCheckerApp {
 
         public static void main(String[] args) {
 
-            String input = "noon";
+            String input = "civic";
 
             char[] stack = new char[input.length()];
-            int top = -1;
+            char[] queue = new char[input.length()];
 
-            // Push characters into stack
+            int top = -1;
+            int front = 0;
+            int rear = -1;
+
+            // Insert characters into stack and queue
             for (int i = 0; i < input.length(); i++) {
-                stack[++top] = input.charAt(i);
+                char c = input.charAt(i);
+
+                stack[++top] = c;     // push
+                queue[++rear] = c;    // enqueue
             }
 
             boolean isPalindrome = true;
 
-            // Pop and compare
+            // Compare stack pop and queue dequeue
             for (int i = 0; i < input.length(); i++) {
-                char popped = stack[top--];
 
-                if (input.charAt(i) != popped) {
+                char fromStack = stack[top--];   // pop
+                char fromQueue = queue[front++]; // dequeue
+
+                if (fromStack != fromQueue) {
                     isPalindrome = false;
                     break;
                 }
