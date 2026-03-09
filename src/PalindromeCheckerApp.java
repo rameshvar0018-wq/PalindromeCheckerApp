@@ -1,44 +1,40 @@
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 public class PalindromeCheckerApp {
+    public static void main(String[] args) {
 
+            // Define the input string
+            String input = "radar";
 
+            // Create a Deque to store characters
+            Deque<Character> deque = new ArrayDeque<>();
 
-
-
-
-        public static void main(String[] args) {
-
-            String input = "civic";
-
-            char[] stack = new char[input.length()];
-            char[] queue = new char[input.length()];
-
-            int top = -1;
-            int front = 0;
-            int rear = -1;
-
-            // Insert characters into stack and queue
-            for (int i = 0; i < input.length(); i++) {
-                char c = input.charAt(i);
-
-                stack[++top] = c;     // push
-                queue[++rear] = c;    // enqueue
+            // Add each character to the deque
+            for (char c : input.toCharArray()) {
+                deque.addLast(c);
             }
 
+            // Assume it is palindrome
             boolean isPalindrome = true;
 
-            // Compare stack pop and queue dequeue
-            for (int i = 0; i < input.length(); i++) {
+            // Continue comparison while more than one element exists
+            while (deque.size() > 1) {
 
-                char fromStack = stack[top--];   // pop
-                char fromQueue = queue[front++]; // dequeue
+                char first = deque.removeFirst();
+                char last = deque.removeLast();
 
-                if (fromStack != fromQueue) {
+                if (first != last) {
                     isPalindrome = false;
                     break;
                 }
             }
 
-            System.out.println("Input : " + input);
-            System.out.println("Is Palindrome? : " + isPalindrome);
+            // Print result
+            System.out.println("Palindrome : " + isPalindrome);
         }
     }
+
+
+
+
