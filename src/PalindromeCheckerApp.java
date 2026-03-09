@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC10.
+     * Application entry point for UC11.
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
@@ -15,23 +15,42 @@ public class PalindromeCheckerApp {
         System.out.print("Input : ");
         String input = scanner.nextLine();
 
-        // Normalize the string (remove non-alphanumeric characters and convert to lowercase)
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        boolean result = PalindromeUtil.isPalindrome(input);
 
-        boolean isPalindrome = true;
-
-        // Compare characters from both ends
-        for (int i = 0; i < normalized.length() / 2; i++) {
-
-            // Compare symmetric characters
-            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Is Palindrome? : " + result);
 
         scanner.close();
+    }
+}
+
+/**
+ * Utility class for palindrome operations.
+ */
+class PalindromeUtil {
+
+    /**
+     * Determines whether the input string is a palindrome.
+     *
+     * @param text Input string
+     * @return true if palindrome, otherwise false
+     */
+    public static boolean isPalindrome(String text) {
+
+        // initialize pointers
+        int start = 0;
+        int end = text.length() - 1;
+
+        // compare characters moving inward
+        while (start < end) {
+
+            if (text.charAt(start) != text.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
     }
 }
