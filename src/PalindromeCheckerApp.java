@@ -1,39 +1,40 @@
 import java.util.Scanner;
 
-class PalindromeChecker {
+public class PalindromeCheckerApp {
 
-    public boolean checkPalindrome(String input) {
+    public static boolean isPalindrome(String input) {
+
         String reverse = "";
 
-        for(int i = input.length() - 1; i >= 0; i--) {
+        for (int i = input.length() - 1; i >= 0; i--) {
             reverse = reverse + input.charAt(i);
         }
 
-        if(input.equalsIgnoreCase(reverse)) {
+        if (input.equalsIgnoreCase(reverse))
             return true;
-        } else {
+        else
             return false;
-        }
     }
-}
-
-public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter a string: ");
+        System.out.print("Input : ");
         String input = sc.nextLine();
 
-        PalindromeChecker pc = new PalindromeChecker();
+        // Start time
+        long startTime = System.nanoTime();
 
-        boolean result = pc.checkPalindrome(input);
+        boolean result = isPalindrome(input);
 
-        if(result)
-            System.out.println("Palindrome");
-        else
-            System.out.println("Not Palindrome");
+        // End time
+        long endTime = System.nanoTime();
+
+        long executionTime = endTime - startTime;
+
+        System.out.println("Is Palindrome? : " + result);
+        System.out.println("Execution Time : " + executionTime + " ns");
 
         sc.close();
     }
