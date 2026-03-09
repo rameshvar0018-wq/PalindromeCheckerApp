@@ -1,38 +1,37 @@
+import java.util.Scanner;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+
 
 public class PalindromeCheckerApp {
 
+    /**
+     * Application entry point for UC10.
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
 
-        // Define the input string
-        String input = "level";
+        Scanner scanner = new Scanner(System.in);
 
-        // Create a deque to store characters
-        Deque<Character> deque = new ArrayDeque<>();
+        System.out.print("Input : ");
+        String input = scanner.nextLine();
 
-        // Add each character to the deque
-        for (char c : input.toLowerCase().toCharArray()) {
-            deque.addLast(c);
-        }
+        // Normalize the string (remove non-alphanumeric characters and convert to lowercase)
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        // Assume it is a palindrome
         boolean isPalindrome = true;
 
-        // Compare until only one or zero elements remain
-        while (deque.size() > 1) {
+        // Compare characters from both ends
+        for (int i = 0; i < normalized.length() / 2; i++) {
 
-            char first = deque.removeFirst();
-            char last = deque.removeLast();
-
-            if (first != last) {
+            // Compare symmetric characters
+            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Print result
         System.out.println("Is Palindrome? : " + isPalindrome);
+
+        scanner.close();
     }
 }
